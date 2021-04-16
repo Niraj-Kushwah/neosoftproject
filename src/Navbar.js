@@ -1,5 +1,5 @@
 
-
+import { Link } from "react-router-dom"
 function Navbar(props) {
   var onlinestaus=0;
   let search=function(event)
@@ -11,7 +11,7 @@ function Navbar(props) {
 
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+     <Link to="/"> <a class="navbar-brand">My CakeShop</a></Link>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -19,7 +19,7 @@ function Navbar(props) {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+       <Link to="/"> <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></Link>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
@@ -47,7 +47,7 @@ function Navbar(props) {
     <div>
        {
          props.loginstatus ? <button className="btn btn-danger">Logout</button>  
-         :  <button className="btn btn-success">Login</button>
+         :  <Link to="/login"><button className="btn btn-success">Login</button></Link>
         }
     </div>
   </div>

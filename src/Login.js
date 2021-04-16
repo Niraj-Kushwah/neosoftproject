@@ -1,5 +1,6 @@
 import {useState,useEffect} from "react"
 import axios from "axios"
+import { Link } from "react-router-dom"
 function Login(props)
 {
 
@@ -78,6 +79,13 @@ function Login(props)
                 <div style={{color:"red"}}>
                     {errorMessage}
                 </div>
+                <div style={{ float:"left"}}>
+                  <Link to="/signup">New User! Click Here</Link>
+                </div>
+                <div style={{ float:"right"}}>
+                  <Link to="/forgot">Forgot Password</Link>
+                </div>
+
               <button className="btn btn-primary" onClick={login}>Login</button>
             </div>
 		)

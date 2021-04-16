@@ -1,5 +1,6 @@
 import {Component} from "react"
 import axios from "axios"
+import { Link } from "react-router-dom"
 class Signup extends Component
 {
 	constructor()
@@ -95,6 +96,11 @@ class Signup extends Component
                 <div style={{color:"red"}}>
                     {this.state.errorMessage}
                 </div>
+
+                <div style={{ float:"right"}}>
+                  <Link to="/login">Already User! Click Here</Link>
+                </div>
+
               <button className="btn btn-primary" onClick={this.register}>Register</button>
             </div>
 		)
