@@ -1,13 +1,34 @@
 
-import { Link } from "react-router-dom"
+import {useState,useEffect} from "react"
+import { Link ,useHistory} from "react-router-dom"
+import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 function Navbar(props) {
+  const history = useHistory();
+
   var onlinestaus=0;
-  let search=function(event)
+  var [query,setQuery]=useState()
+  let getQuery=function(event)
   {
-    event.prevenDefault()
-    onlinestaus++;
-    alert(onlinestaus)
+    setQuery(event.target.value)
   }
+
+   let logout=function(event){
+        event.preventDefault()
+        props.dispatch({
+            type:"LOGOUT"
+        })
+        
+    }
+
+ /* let search=function(event)
+  {
+    // event.prevenDefault()
+    // onlinestaus++;
+    // alert(onlinestaus)
+    //s{localStorage.getItem("email")}
+  }*/
 
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,17 +57,21 @@ function Navbar(props) {
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+         <Link to="/cart"><button className="btn btn-warning"><FontAwesomeIcon icon={faShoppingCart} /></button></Link>
       </li>
     </ul>
-    {props.children}   Hello {props.user}
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-      <button onClick={search} class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
+    {props.children}   Hello {props.user} 
+    <div class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={getQuery}/>
+      <Link to={`/search?q=${query}`}><button className="btn btn-outline-success">Search</button></Link>
+    </div>
     <div>
        {
-         props.loginstatus ? <button className="btn btn-danger">Logout</button>  
+        
+         props.loginstatus ? 
+
+         <button className="btn btn-danger" onClick={logout}>Logout</button>  
          :  <Link to="/login"><button className="btn btn-success">Login</button></Link>
         }
     </div>
@@ -55,4 +80,10 @@ function Navbar(props) {
   );
 }
 
-export default Navbar;
+export default connect(function(state,props){
+    console.log("............state initially" , state)
+    return {
+        user:state ?.user?.name,
+        loginstatus:state?.isloggedin
+    }
+})(Navbar)

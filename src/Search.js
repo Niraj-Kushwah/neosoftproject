@@ -1,11 +1,14 @@
 import axios from 'axios'
 import Cake from './Cake';
 import {useEffect , useState} from "react";
-function Search()
+import queryString from "query-string"
+function Search(props)
 {
-       let [cakesearch,setCakes]=useState([])
-  
-        let apisearchurl="https://apibyashu.herokuapp.com/api/searchcakes?q="+"chocolate"
+    const parsed=queryString.parse(props.location.search)
+       console.log(">>>>>>>>>>",parsed)
+       let [cakesearch,setCakes]=useState([])  
+       /*let apisearchurl="https://apibyashu.herokuapp.com/api/searchcakes"+props.location.search*/
+       let apisearchurl="https://apibyashu.herokuapp.com/api/searchcakes?q="+parsed.q
         useEffect(() => {
             axios({
                 url:apisearchurl,
@@ -16,7 +19,7 @@ function Search()
             },(error)=>{
                 console.log("error from search api",error)
             })
-        }, [])
+        }, [parsed.q])
             
     return (
         

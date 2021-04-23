@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Cake from './Cake'
+import Carousel from './Carousel'
 import cakesfromdatafile from './data.js'
 import axios from "axios"
 var carousel_card="carousel_card.jpeg"
@@ -32,7 +33,9 @@ function Home() {
   },[]);
            
 
-  return (  
+  return ( 
+    <>
+    <Carousel/> 
     <div>
         <h2>All Cakes Section</h2>
 	    <div className="row" style={{ paddingLeft:"30px"}}>
@@ -42,6 +45,7 @@ function Home() {
 		    }
 	   </div>
 	</div>
+  </>
     /*<Cake name="cakes1" image={carousel_card}/>  with direct props  
     <Cake cakedat={obj}/>  with object pass as a props */ 
   );
